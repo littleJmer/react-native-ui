@@ -11,7 +11,16 @@ import Button from './Button'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-export default ({ show, onClick, title, message, type = 'success' }) => {
+export default ({
+    show,
+    onClick,
+    title,
+    message,
+    type = 'success',
+    okText = 'Continuar',
+    cancelText = 'Cancelar',
+    onCancel,
+}) => {
     if (!show) return null;
     return (
         <View style={{
@@ -36,6 +45,7 @@ export default ({ show, onClick, title, message, type = 'success' }) => {
 
                     <View style={{ display: 'flex', alignItems: 'center', paddingTop: 50 }}>
                         {type === 'success' && (<Icon name="checkbox-marked-circle-outline" size={80} color="#008000" />)}
+                        {type === 'info' && (<Icon name="help-circle" size={80} color="#4f4f4f" />)}
                     </View>
 
                     <View style={{ display: 'flex', alignItems: 'center', padding: 24 }}>
@@ -43,15 +53,22 @@ export default ({ show, onClick, title, message, type = 'success' }) => {
                         <Text style={{ fontSize: 16, color: '#808080', textAlign: 'center' }}>{message}</Text>
                     </View>
 
-                    <View>
+                    <View style={[typeof onCancel === 'function' && styles.row]}>
+                        {typeof onCancel === 'function' && (
+                            <Button
+                                color="tomato"
+                                style={styles.button}
+                                onPress={onCancel}
+                            >
+                                <Text style={{ color: '#fff' }}>{cancelText}</Text>
+                            </Button>
+                        )}
                         <Button
                             color="primary"
-                            style={{ alignSelf: 'center', borderRadius: 15, paddingVertical: 9, paddingHorizontal: 48 }}
-                            onPress={() => {
-                                if (typeof onClick === 'function') onClick();
-                            }}
+                            style={styles.button}
+                            onPress={() => { if (typeof onClick === 'function') onClick(); }}
                         >
-                            <Text style={{ color: '#fff' }}>Continuar</Text>
+                            <Text style={{ color: '#fff' }}>{okText}</Text>
                         </Button>
                     </View>
 
@@ -59,4 +76,17 @@ export default ({ show, onClick, title, message, type = 'success' }) => {
             </View>
         </View>
     )
-}
+};
+
+const styles = StyleSheet.create({
+    row: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    button: {
+        alignSelf: 'center',
+        borderRadius: 15,
+        paddingVertical: 9,
+        paddingHorizontal: 25,
+    }
+});

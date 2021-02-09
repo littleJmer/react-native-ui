@@ -7,7 +7,7 @@ import {
     Image
 } from 'react-native';
 
-import spinnerGif from '@assets/images/spinner.gif';
+import spinnerGif from './assets/images/spinner.gif';
 
 export default ({ show, message }) => {
     if (!show) return null;

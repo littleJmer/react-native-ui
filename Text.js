@@ -15,6 +15,8 @@ const CustomText = (props) => {
         subtitle,
         md,
         bold,
+        margin,
+        padding,
         //
         ...restOfProps
     } = props;
@@ -27,6 +29,8 @@ const CustomText = (props) => {
         subtitle && styles.subtitle,
         md && styles.md,
         bold && styles.bold,
+        padding && utils.evaluateValue(padding, 'padding'),
+        margin && utils.evaluateValue(margin, 'margin'),
         style // rewrite predefined styles
     ];
 
