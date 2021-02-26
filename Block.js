@@ -45,8 +45,9 @@ const Block = (props) => {
                 contentContainerStyle={{ flexGrow: 1, justifyContent: 'space-between' }}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
+                {...restOfProps}
             >
-                <View style={css} {...restOfProps}>{children}</View>
+                <View style={css}>{children}</View>
             </ScrollView>
         )
     }
