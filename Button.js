@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, View, StyleSheet, ActivityIndicator } from 'react-native';
 
-import utils from './utils';
+import utils, { hp, wp } from './utils';
 import theme from './theme';
 
 const Button = (props) => {
@@ -51,12 +51,12 @@ const styles = StyleSheet.create({
     base: {
         backgroundColor: theme.colors.accent,
         borderRadius: 2,
-        paddingVertical: 14,
+        paddingVertical: hp(2.2),
         paddingHorizontal: 12
     },
     md: {
-        paddingVertical: 6,
-        paddingHorizontal: 12,
+        paddingVertical: hp(.8),
+        paddingHorizontal: wp(2),
     },
     variant: {
         backgroundColor: theme.colors.white,

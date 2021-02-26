@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 
-import utils from './utils';
+import utils, { hp } from './utils';
 
 const CustomText = (props) => {
 
@@ -42,20 +42,24 @@ const CustomText = (props) => {
 
 const styles = StyleSheet.create({
     base: {
-        fontSize: 16
+        // fontSize: 16
+        fontSize: hp(2.2)
     },
     md: {
-        fontSize: 14,
+        // fontSize: 14,
+        fontSize: hp(1.8)
     },
     bold: {
         fontWeight: '700'
     },
     title: {
-        fontSize: 24,
+        // fontSize: 24,
+        fontSize: hp(4),
         fontWeight: '700'
     },
     subtitle: {
-        fontSize: 20,
+        // fontSize: 20,
+        fontSize: hp(2.7),
         fontWeight: '700'
     },
     center: {

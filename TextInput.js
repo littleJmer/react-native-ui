@@ -4,6 +4,8 @@ import { View, TextInput, StyleSheet } from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import { hp } from './utils';
+
 class CustomTextInput extends React.Component {
 
     constructor(props) {
@@ -34,7 +36,7 @@ class CustomTextInput extends React.Component {
     renderIcon(icon) {
         return (
             <View style={{ marginRight: 5 }}>
-                <Icon name={icon} size={20} color="#9FB3D2" />
+                <Icon name={icon} size={hp(3)} color="#9FB3D2" />
             </View>
         )
     }
