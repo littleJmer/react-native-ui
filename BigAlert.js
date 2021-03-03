@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
     View,
@@ -11,6 +11,10 @@ import Button from './Button'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import BackgroundTimer from 'react-native-background-timer';
+
+var timeoutref;
+
 export default ({
     show,
     onClick,
@@ -20,7 +24,32 @@ export default ({
     okText = 'Continuar',
     cancelText = 'Cancelar',
     onCancel,
+    delay, // seconds
 }) => {
+
+    const [counter, setCounter] = useState(0);
+
+    useEffect(() => {
+        if (show && delay > 0) {
+            setCounter(10);
+        }
+    }, [show]);
+
+    useEffect(() => {
+        if (counter > 0) {
+            timeoutref = BackgroundTimer.setTimeout(() => {
+                setCounter(counter - 1);
+            }, 1000);
+        }
+        if (counter === 0 && timeoutref && show) {
+            if (typeof onCancel === 'function') onCancel();
+        }
+        return () => {
+            BackgroundTimer.clearTimeout(timeoutref);
+        }
+    }, [counter]);
+
+
     if (!show) return null;
     return (
         <View style={{
@@ -49,6 +78,7 @@ export default ({
                     </View>
 
                     <View style={{ display: 'flex', alignItems: 'center', padding: 24 }}>
+                        {counter > 0 && <Text style={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center' }}>{counter}s</Text>}
                         <Text style={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center' }}>{title}</Text>
                         <Text style={{ fontSize: 16, color: '#808080', textAlign: 'center' }}>{message}</Text>
                     </View>
@@ -57,7 +87,7 @@ export default ({
                         {typeof onCancel === 'function' && (
                             <Button
                                 color="tomato"
-                                style={styles.button}
+                                style={[styles.button, { marginRight: 8 }]}
                                 onPress={onCancel}
                             >
                                 <Text style={{ color: '#fff' }}>{cancelText}</Text>
@@ -74,14 +104,15 @@ export default ({
 
                 </View>
             </View>
-        </View>
+        </View >
     )
 };
 
 const styles = StyleSheet.create({
     row: {
         flexDirection: 'row',
-        justifyContent: 'space-between'
+        justifyContent: 'center'
+        // justifyContent: 'space-between'
     },
     button: {
         alignSelf: 'center',
