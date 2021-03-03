@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     base: {
         backgroundColor: theme.colors.accent,
         borderRadius: 2,
-        paddingVertical: hp(2.2),
+        paddingVertical: hp(1.3),
         paddingHorizontal: 12
     },
     md: {
